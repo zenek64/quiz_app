@@ -1,16 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/views/start.dart';
+import 'package:quiz_app/quiz.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: Container(
-          decoration:
-              const BoxDecoration(color: Color.fromARGB(255, 13, 71, 161)),
-          child: const StartPage(),
-        ),
-      ),
-    ),
-  );
+  runApp(const Quiz());
 }
