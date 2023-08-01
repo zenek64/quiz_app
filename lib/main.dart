@@ -3,9 +3,13 @@ import 'package:quiz_app/views/start.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
+    MaterialApp(
       home: Scaffold(
-        body: StartPage(),
+        body: Container(
+          decoration:
+              const BoxDecoration(color: Color.fromARGB(255, 13, 71, 161)),
+          child: const StartPage(),
+        ),
       ),
     ),
   );
