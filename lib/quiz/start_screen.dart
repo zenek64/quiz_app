@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage(this.startQuiz, {super.key});
@@ -27,8 +28,13 @@ class StartPage extends StatelessWidget {
               backgroundColor: Colors.black,
               padding: const EdgeInsets.all(20),
             ),
-            child:
-                const Text("Start Quiz", style: TextStyle(color: Colors.white)))
+            child: Text(
+              "Start Quiz",
+              style: GoogleFonts.lato(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold),
+            ))
       ],
     ));
   }
