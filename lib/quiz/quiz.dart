@@ -6,6 +6,7 @@ import 'package:quiz_app/quiz/results_screen.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
+
   @override
   State<Quiz> createState() {
     return _QuizState();
@@ -13,18 +14,12 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  Widget? activeScreen;
   List<String> selectedAnswers = [];
-
-  @override
-  void initState() {
-    activeScreen = StartPage(switchScreen);
-    super.initState();
-  }
+  var activeScreen = 'start-screen';
 
   void switchScreen() {
     setState(() {
-      activeScreen = QuestionsScreen(onSelectAnswer: chooseAnswer);
+      activeScreen = 'questions-screen';
     });
   }
 
@@ -33,21 +28,41 @@ class _QuizState extends State<Quiz> {
 
     if (selectedAnswers.length == questions.length) {
       setState(() {
-        activeScreen = ResultsScreen(
-          chosenAnswers: selectedAnswers,
-        );
+        activeScreen = 'results-screen';
       });
     }
   }
 
+  void restartQuiz() {
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = 'questions-screen';
+    });
+  }
+
   @override
   Widget build(context) {
+    Widget screenWidget = StartPage(switchScreen);
+
+    if (activeScreen == 'questions-screen') {
+      screenWidget = QuestionsScreen(
+        onSelectAnswer: chooseAnswer,
+      );
+    }
+
+    if (activeScreen == 'results-screen') {
+      screenWidget = ResultsScreen(
+        chosenAnswers: selectedAnswers,
+        onRestart: restartQuiz,
+      );
+    }
+
     return MaterialApp(
       home: Scaffold(
         body: Container(
           decoration:
               const BoxDecoration(color: Color.fromARGB(255, 13, 71, 161)),
-          child: activeScreen,
+          child: screenWidget,
         ),
       ),
     );
